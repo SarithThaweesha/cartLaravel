@@ -17,6 +17,10 @@ return new class extends Migration
             $table->text("author")->nullable();
             $table->string("image",255)->nullable();
             $table->decimal("price",6,2);
+            $table->string("category",255);
+
+            // Define the foreign key constraint
+            $table->foreign('category')->references('category_name')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
