@@ -38,8 +38,13 @@
 <tfoot>
     <tr>
         <td colspan="5" class="text-right">
-            <a href="{{url('/Books')}}" class="btn btn-primary"><i class="fa fa-angle-left"></i>Continue shopping</a>
-            <button class="btn btn-danger">Checkout</button>
+            <a href="{{url('/')}}" class="btn btn-primary"><i class="fa fa-angle-left"></i>Continue shopping</a>
+            {{-- Checkout form --}}
+                    <form action="{{ route('checkout') }}" method="post" style="display: inline;">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Checkout</button>
+                    </form>
+            {{-- End Checkout form --}}
         </td>
     </tr>
 </tfoot>

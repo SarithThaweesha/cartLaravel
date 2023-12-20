@@ -68,26 +68,25 @@ class BookController extends Controller
   }
 
   public function updateBook(Request $request, $id)
-  {
-      $request->validate([
-          'id' => 'required|max:255',
-          'name' => 'required',
-          'author' => 'required',
-          'image' => 'required',
-          'price' => 'required',
-          'category' => 'required',
-      ]);
-  
-      $book = Book::find($id);
-  
-      if (!$book) {
-          return redirect()->route('products')->with('error', 'Book not found');
-      }
-  
-      $book->update($request->all());
-  
-      return redirect()->route('products')->with('success', 'Book updated successfully in db.');
-  }
+    {
+        $request->validate([
+            'name' => 'required',
+            'author' => 'required',
+            'image' => 'required',
+            'price' => 'required',
+            'category' => 'required',
+        ]);
+
+        $book = Book::find($id);
+
+        if (!$book) {
+            return redirect()->route('products')->with('error', 'Book not found');
+        }
+
+        $book->update($request->all());
+
+        return redirect()->route('products')->with('success', 'Book updated successfully in db.');
+    }
 
   public function destroy($id)
   {
@@ -120,36 +119,36 @@ class BookController extends Controller
     return view('books.edit', compact('book'));
 }*/
 public function edit($id = null)
-{
-    $book = $id ? Book::find($id) : new Book();
+    {
+        $book = $id ? Book::find($id) : new Book();
 
-    if (!$book) {
-        $book = new Book();
-        $book->id = null; // Set id to null or any default value as needed
-    }
-
-    return view('books.edit', compact('book'));
-}
-
-
-public function searchBook(Request $request)
-{
-    $request->validate([
-        'search_id' => 'nullable|exists:books,id',
-    ]);
-
-    if ($request->has('search_id')) {
-        $book = Book::find($request->input('search_id'));
-
-        if ($book) {
-            return view('books.edit', compact('book'));
-        } else {
-            return redirect()->route('books.edit')->with('error', 'Book not found');
+        if (!$book) {
+            $book = new Book();
+            $book->id = null; // Set id to null or any default value as needed
         }
+
+        return view('books.edit', compact('book'));
     }
 
-    return redirect()->route('books.edit')->with('error', 'Invalid input for search');
-}
+
+    public function searchBook(Request $request)
+    {
+        $request->validate([
+            'search_id' => 'nullable|exists:books,id',
+        ]);
+
+        if ($request->has('search_id')) {
+            $book = Book::find($request->input('search_id'));
+
+            if ($book) {
+                return view('books.edit', compact('book'));
+            } else {
+                return redirect()->route('books.edit')->with('error', 'Book not found');
+            }
+        }
+
+        return redirect()->route('books.edit')->with('error', 'Invalid input for search');
+    }
 
 
 public function updateB()

@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{{url('/books/create')}}"> Add book</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/update')}}"> Update book</a>
+                <a class="nav-link" href="{{url('/update')}}"> Manage book</a>
             </li>
         </ul>
         <a class="btn btn-outline-dark" href="{{route('shopping.cart')}}">
