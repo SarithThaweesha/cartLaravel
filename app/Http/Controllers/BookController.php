@@ -35,10 +35,7 @@ class BookController extends Controller
         return redirect()->back()->with('success','Book has been added to cart');
     }
 
-    public function bookCart()
-    {
-        return view('cart');
-    }
+  
 
     public function deleteProduct(Request $request)
     {
@@ -51,6 +48,26 @@ class BookController extends Controller
             session()->flash('success','Book successfully deleted!');
         }
     }
+
+    public function bookCart()
+{
+    $cart = session()->get('cart', []);
+    $total = $this->calculateTotal($cart);
+
+    return view('cart', compact('cart', 'total'));
+}
+
+private function calculateTotal($cart)
+{
+    $total = 0;
+
+    foreach ($cart as $item) {
+        $total += $item['quantity'] * $item['price'];
+    }
+
+    return $total;
+}
+
 /*below are database controlling functions */
     public function addBook(Request $request)
   {

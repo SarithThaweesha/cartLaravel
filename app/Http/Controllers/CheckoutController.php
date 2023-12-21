@@ -10,7 +10,7 @@ use Illuminate\View\View;
 
 class CheckoutController extends Controller
 {
-    public function checkout()
+   /* public function checkout()
     {
         $cart = session()->get('cart', []);
 
@@ -34,5 +34,39 @@ class CheckoutController extends Controller
         session()->forget('cart');
 
         return redirect()->route('products')->with('success', 'Checkout successful!');
+    }*/
+
+    public function checkout()
+    {
+        $cart = session()->get('cart', []);
+        $total = $this->calculateTotal($cart);
+
+        return view('checkout', compact('cart', 'total'));
+    }
+
+    public function processCheckout(Request $request)
+    {
+        $cart = $request->session()->get('cart', []);
+        $total = $request->input('total_amount');
+
+        // ... (other processing logic if needed)
+
+        return view('stripe')->with([
+            'billingDetails' => $request->only(['name', 'address', 'country', 'city', 'zip_code', 'phone']),
+            'cartDetails' => $cart,
+            'totalAmount' => $total,
+        ]);
+    }
+
+
+    private function calculateTotal($cart)
+    {
+        $total = 0;
+
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+
+        return $total;
     }
 }

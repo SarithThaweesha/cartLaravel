@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,4 +62,12 @@ Route::get('/update', [BookController::class, 'updateB'])->name('updateBook');
 
 Route::post('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});
+
+/*Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/process-checkout', [CheckoutController::class, 'processCheckout'])->name('process.checkout');*/
 

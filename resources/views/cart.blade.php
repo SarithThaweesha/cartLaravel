@@ -6,8 +6,8 @@
         <tr>
             <th>Product</th>
             <th>Price</th>
-            <th>Total</th>
-            <th></th>
+            <th>quantity</th>
+            <th>Remove</th>
         </tr>
 
 </thead>
@@ -25,7 +25,8 @@
             </div>
         </td>
         <td data-th="Price">{{$details['price']}}</td>
-        <td data-th="Subtotal" class="text-center"></td>
+        <td data-th="Quantity">{{ $details['quantity'] }}</td>
+        <!--<td data-th="Subtotal" class="text-center"></td>-->
         <td class="actions">
             <a class="btn btn-outlinr-danger btm-sm delete-product"><i class="fa fa-trash"></i>
         </td>
@@ -37,14 +38,21 @@
 </tbody>
 <tfoot>
     <tr>
-        <td colspan="5" class="text-right">
+        <td colspan="5" class="text-right d-flex justify-content-between align-items-center">
             <a href="{{url('/')}}" class="btn btn-primary"><i class="fa fa-angle-left"></i>Continue shopping</a>
-            {{-- Checkout form --}}
+        </td>
+        <td></td>
+        <td>
+           <p>Total: Rs.{{ $total }}</p>           
+        </td>
+        <td>
+        {{-- Checkout form --}}
                     <form action="{{ route('checkout') }}" method="post" style="display: inline;">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Checkout</button>
-                    </form>
+                        <button type="submit" class="btn btn-danger ml-auto">Checkout <p> Rs.{{ $total }}</p> </button>
+                    </form>    
             {{-- End Checkout form --}}
+            
         </td>
     </tr>
 </tfoot>
