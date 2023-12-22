@@ -77,6 +77,8 @@
                                     again .</div>
                             </div>
                         </div>
+                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+
     
                         <div class="row">
                             <div class="col-12">

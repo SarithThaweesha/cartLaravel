@@ -74,6 +74,11 @@
 <!-- Hidden input field for total amount -->
 <input type="hidden" name="total_amount" value="{{ $total }}">
 
+ <!-- Hidden input field for book IDs -->
+    @foreach($cart as $id => $details)
+        <input type="hidden" name="book_ids[]" value="{{ $id }}">
+    @endforeach
+
 <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn-primary btn-lg ml-auto">Proceed to Pay</button>
 </div>
