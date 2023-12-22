@@ -74,7 +74,7 @@
                         <div class='row g-3'>
                             <div class='col-md-12 error form-group d-none'>
                                 <div class='alert-danger alert'>Please correct the errors and try
-                                    again.</div>
+                                    again .</div>
                             </div>
                         </div>
     

@@ -75,7 +75,7 @@
 <input type="hidden" name="total_amount" value="{{ $total }}">
 
 <div class="d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary btn-lg ml-auto">Proceed to Payment</button>
+    <button type="submit" class="btn btn-primary btn-lg ml-auto">Proceed to Pay</button>
 </div>
 
         </form>
