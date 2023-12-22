@@ -37,12 +37,16 @@ class CheckoutController extends Controller
     }*/
 
     public function checkout()
-    {
-        $cart = session()->get('cart', []);
-        $total = $this->calculateTotal($cart);
+{
+    $cart = session()->get('cart', []);
+    $total = $this->calculateTotal($cart);
 
-        return view('checkout', compact('cart', 'total'));
-    }
+    // Clear the cart after checkout
+   // session()->forget('cart');
+
+    return view('checkout', compact('cart', 'total'));
+}
+
 
     public function processCheckout(Request $request)
     {
